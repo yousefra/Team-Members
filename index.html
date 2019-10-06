@@ -7,39 +7,81 @@
 </head>
 <body>
     
-    <header>
+    <header class="main-header">
         <h1>PSEU Team Memebers</h1>
     </header>
 
-    <div class="left-container">
-        <form>
-            <h1>Add new member</h1>
-            <input type="text" name="name" id="name" placeholder="Name">
-            <input type="text" name="email" id="email" placeholder="Email">
-            <select name="major" id="major">
-                <option value="" disabled selected>Major</option>
-                <option value="computerScience">Computer Science</option>
-                <option value="computerEngineering">Computer Engineering</option>
-                <option value="informationTechnology">Information Technology</option>
-                <option value="informationSystem">Information System</option>
-            </select>
-            <select name="role" id="role">
-                <option value="" disabled selected>Role</option>
-                <option value="frontEndDeveloper">Front-End Developer</option>
-                <option value="backEndDeveloper">Back-End Developer</option>
-                <option value="fullStackDeveloper">Full-Stack Developer</option>
-                <option value="UIUXDesigner">UI/UX Designer</option>
-            </select>
-            <textarea id="biography" placeholder="Biography" max-width="451.5px"></textarea>
-            <div class="position">
-                <input type="checkbox" name="addToBottom" id="addToBottom"> Add to Bottom / or at index
-                <input type="number" class="atIndex" min="0">
+    <div class="container">
+        <div class="left-container">
+            <form>
+                <h1>Add new member</h1>
+                <input type="text" name="name" placeholder="Name">
+                <input type="text" name="email" placeholder="Email">
+                <select name="major">
+                    <option value="" disabled selected>Major</option>
+                    <option value="computerScience">Computer Science</option>
+                    <option value="computerEngineering">Computer Engineering</option>
+                    <option value="informationTechnology">Information Technology</option>
+                    <option value="informationSystem">Information System</option>
+                </select>
+                <select name="role">
+                    <option value="" disabled selected>Role</option>
+                    <option value="frontEndDeveloper">Front-End Developer</option>
+                    <option value="backEndDeveloper">Back-End Developer</option>
+                    <option value="fullStackDeveloper">Full-Stack Developer</option>
+                    <option value="UIUXDesigner">UI/UX Designer</option>
+                </select>
+                <textarea placeholder="Biography" max-width="451.5px"></textarea>
+                <div class="position">
+                    <input type="checkbox" name="addToBottom"> Add to Bottom / or at index
+                    <input type="number" class="atIndex" min="0">
+                </div>
+                <input type="submit" value="Save" class="save">
+            </form>
+        </div>
+    
+        <div class="main-container">
+            <header class="filter-header">
+                <section class="left">
+                    <p>Sort By</p>
+                    <select name="sortBy" class="sortBy">
+                        <option value="A-Z" selected>A-Z</option>
+                        <option value="Z-A">Z-A</option>
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                    <div class="separator"></div>
+                    <select name="filter-major" class="filter-major">
+                        <option value="" disabled selected>Major</option>
+                        <option value="computerScience">Computer Science</option>
+                        <option value="computerEngineering">Computer Engineering</option>
+                        <option value="informationTechnology">Information Technology</option>
+                        <option value="informationSystem">Information System</option>
+                    </select>
+                    <select name="filter-role" class="filter-role">
+                        <option value="" disabled selected>Role</option>
+                        <option value="frontEndDeveloper">Front-End Developer</option>
+                        <option value="backEndDeveloper">Back-End Developer</option>
+                        <option value="fullStackDeveloper">Full-Stack Developer</option>
+                        <option value="UIUXDesigner">UI/UX Designer</option>
+                    </select>
+                    <div class="separator"></div>
+                    <input type="text" name="search" class="search" placeholder="Search by name ...">
+                </section>
+                <section class="right">
+                    <p class="members-number">15 items</p>
+                </section>
+            </header>
+            <div class="members">
+                <div class="member">
+                    <div class="delete-btn"></div>
+                    <div class="name"></div>
+                    <div class="info"></div>
+                    <div class="description"></div>
+                </div>
             </div>
-            <input type="submit" value="Save" class="save">
-        </form>
+        </div>
     </div>
-
-    <div class="main-container"></div>
 
     <script src="dist/js/main.js"></script>
 </body>
