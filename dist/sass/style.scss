@@ -1,7 +1,101 @@
+$colors: (
+    main: #2D89E6,
+    gray: #707070,
+    background: #F6F6F6,
+    border: #C3C3C3,
+    placeholder: #AEAEAE
+);
+
+@function color($color) {
+    $color: map-get($colors, $color);
+    @return $color;
+}
+
+@mixin centeredFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 * {
     box-sizing: border-box;
 }
 
 html, body {
     height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI';
+    overflow: hidden;
+}
+
+::placeholder {
+    color: color(placeholder);
+}
+
+
+header {
+    @include centeredFlex;
+
+    background-color: color(main);
+    width: 100%;
+    height: 76px;
+
+    h1 {
+        font-size: 22px;
+        color: #fff;
+    }
+}
+
+.left-container {
+    @include centeredFlex;
+
+    margin: 45px 0 0 140px;
+    width: 527px;
+    border: 1px solid color(border);
+    border-radius: 34px;
+    
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 22px;
+        color: color(gray);
+    }
+
+    input[type="text"], textarea, select {
+        width: 100%;
+        border: 1px solid color(border);
+        border-radius: 13px;
+        width: 86%;
+        height: 66px;
+        margin: 13px 6%;
+        padding: 18px;
+        font-size: 18px;
+    }
+
+    .position {
+        margin-left: 6%;
+        .atIndex {
+            width: 55px;
+        }
+    }
+
+    textarea {
+        max-width: 451.5px;
+        min-height: 160px;
+    }
+
+    .save {
+        width: 100%;
+        border: none;
+        margin-top: 70px;
+        height: 79px;
+        border-radius: 0 0 34px 34px;
+        background-color: color(main);
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 600;
+        cursor: pointer;
+    }
 }

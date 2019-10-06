@@ -1,3 +1,16 @@
 * { box-sizing: border-box; }
 
-html, body { height: 100%; }
+html, body { height: 100%; margin: 0; padding: 0; font-family: 'Segoe UI'; overflow: hidden; }
+
+::placeholder { color: #AEAEAE; }
+
+header { display: flex; justify-content: center; align-items: center; background-color: #2D89E6; width: 100%; height: 76px; }
+header h1 { font-size: 22px; color: #fff; }
+
+.left-container { display: flex; justify-content: center; align-items: center; margin: 45px 0 0 140px; width: 527px; border: 1px solid #C3C3C3; border-radius: 34px; }
+.left-container h1 { text-align: center; margin-top: 20px; font-size: 22px; color: #707070; }
+.left-container input[type="text"], .left-container textarea, .left-container select { width: 100%; border: 1px solid #C3C3C3; border-radius: 13px; width: 86%; height: 66px; margin: 13px 6%; padding: 18px; font-size: 18px; }
+.left-container .position { margin-left: 6%; }
+.left-container .position .atIndex { width: 55px; }
+.left-container textarea { max-width: 451.5px; min-height: 160px; }
+.left-container .save { width: 100%; border: none; margin-top: 70px; height: 79px; border-radius: 0 0 34px 34px; background-color: #2D89E6; text-transform: uppercase; color: #fff; font-size: 22px; font-weight: 600; cursor: pointer; }
