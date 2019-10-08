@@ -13,28 +13,28 @@
 
     <div class="container">
         <div class="left-container">
-            <form>
+            <form onsubmit="addMember()">
                 <h1>Add new member</h1>
-                <input type="text" name="name" placeholder="Name">
-                <input type="text" name="email" placeholder="Email">
-                <select name="major">
+                <input type="text" id="name" placeholder="Name">
+                <input type="text" id="email" placeholder="Email">
+                <select id="major" onchange="setMajorValue(this)">
                     <option value="" disabled selected>Major</option>
                     <option value="computerScience">Computer Science</option>
                     <option value="computerEngineering">Computer Engineering</option>
                     <option value="informationTechnology">Information Technology</option>
                     <option value="informationSystem">Information System</option>
                 </select>
-                <select name="role">
+                <select id="role" onchange="setRoleValue(this)">
                     <option value="" disabled selected>Role</option>
                     <option value="frontEndDeveloper">Front-End Developer</option>
                     <option value="backEndDeveloper">Back-End Developer</option>
                     <option value="fullStackDeveloper">Full-Stack Developer</option>
                     <option value="UIUXDesigner">UI/UX Designer</option>
                 </select>
-                <textarea placeholder="Biography" max-width="451.5px"></textarea>
+                <textarea placeholder="Biography" id="biography" max-width="451.5px"></textarea>
                 <div class="position">
-                    <input type="checkbox" name="addToBottom"> Add to Bottom / or at index
-                    <input type="number" class="atIndex" min="0">
+                    <input type="checkbox" id="addToBottom"> Add to Bottom / or at index
+                    <input type="number" class="atIndex" id="atIndex" min="0">
                 </div>
                 <input type="submit" value="Save" class="save">
             </form>
@@ -72,139 +72,11 @@
                     <p class="members-number">15 items</p>
                 </section>
             </header>
-            <div class="members">
-                <div class="member">
-                    <div class="delete-btn"></div>
-                    <div class="content">
-                        <div class="name">
-                            <h1>Faris Abu4ram</h1>
-                        </div>
-                        <div class="info">
-                            <p>faris@pseu.com / Information Technology / Front-End Developer</p>
-                        </div>
-                        <div class="description">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="delete-btn"></div>
-                    <div class="content">
-                        <div class="name">
-                            <h1>Ibrahim Abusamra</h1>
-                        </div>
-                        <div class="info">
-                            <p>faris@pseu.com / Information Technology / Front-End Developer</p>
-                        </div>
-                        <div class="description">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="delete-btn"></div>
-                    <div class="content">
-                        <div class="name">
-                            <h1>Mohammed Alnatsha</h1>
-                        </div>
-                        <div class="info">
-                            <p>faris@pseu.com / Information Technology / Front-End Developer</p>
-                        </div>
-                        <div class="description">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="delete-btn"></div>
-                    <div class="content">
-                        <div class="name">
-                            <h1>Yousef Rayyan</h1>
-                        </div>
-                        <div class="info">
-                            <p>faris@pseu.com / Information Technology / Front-End Developer</p>
-                        </div>
-                        <div class="description">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="delete-btn"></div>
-                    <div class="content">
-                        <div class="name">
-                            <h1>Aseel Arafeh</h1>
-                        </div>
-                        <div class="info">
-                            <p>faris@pseu.com / Information Technology / Front-End Developer</p>
-                        </div>
-                        <div class="description">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="delete-btn"></div>
-                    <div class="content">
-                        <div class="name">
-                            <h1>Fatima Faragallah</h1>
-                        </div>
-                        <div class="info">
-                            <p>faris@pseu.com / Information Technology / Front-End Developer</p>
-                        </div>
-                        <div class="description">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="delete-btn"></div>
-                    <div class="content">
-                        <div class="name">
-                            <h1>Waleed Jubeh</h1>
-                        </div>
-                        <div class="info">
-                            <p>faris@pseu.com / Information Technology / Front-End Developer</p>
-                        </div>
-                        <div class="description">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="member">
-                    <div class="delete-btn"></div>
-                    <div class="content">
-                        <div class="name">
-                            <h1>Faris Abu4ram</h1>
-                        </div>
-                        <div class="info">
-                            <p>faris@pseu.com / Information Technology / Front-End Developer</p>
-                        </div>
-                        <div class="description">
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="members" id="members">
             </div>
         </div>
     </div>
 
-    <script src="dist/js/main.js"></script>
+    <script src="dist/js/main.js" ></script>
 </body>
 </html>
