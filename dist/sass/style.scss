@@ -3,7 +3,8 @@ $colors: (
     gray: #707070,
     background: #F6F6F6,
     border: #C3C3C3,
-    placeholder: #AEAEAE
+    placeholder: #AEAEAE,
+    red: #FF4A4A
 );
 
 @function color($color) {
@@ -14,6 +15,7 @@ $colors: (
 @mixin centeredFlex {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 * {
@@ -35,7 +37,6 @@ html, body {
 .main-header {
     @include centeredFlex;
 
-    align-items: center;
     background-color: color(main);
     width: 100%;
     height: 76px;
@@ -49,126 +50,183 @@ html, body {
 .container {
     display: flex;
     height: 100%;
+}
 
-    .left-container {
-        @include centeredFlex;
+.left-container {
+    @include centeredFlex;
+
+    align-items: unset;
+    position: relative;
+    margin: 45px 0 0 140px;
+    width: 527px;
+    height: 80%;
+    border: 1px solid color(border);
+    border-radius: 34px;
     
-        position: relative;
-        margin: 45px 0 0 140px;
-        width: 527px;
-        height: 80%;
+    
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 22px;
+        color: color(gray);
+    }
+
+    input[type="text"], textarea, select {
+        width: 100%;
         border: 1px solid color(border);
-        border-radius: 34px;
-        
-        
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 22px;
-            color: color(gray);
+        border-radius: 13px;
+        width: 86%;
+        height: 66px;
+        margin: 13px 6%;
+        padding: 18px;
+        font-size: 18px;
+    }
+
+    .position {
+        margin-left: 6%;
+        .atIndex {
+            width: 55px;
         }
-    
-        input[type="text"], textarea, select {
-            width: 100%;
-            border: 1px solid color(border);
-            border-radius: 13px;
-            width: 86%;
-            height: 66px;
-            margin: 13px 6%;
-            padding: 18px;
-            font-size: 18px;
-        }
-    
-        .position {
-            margin-left: 6%;
-            .atIndex {
-                width: 55px;
+    }
+
+    textarea {
+        max-width: 451.5px;
+        min-width: 451.5px;
+        min-height: 160px;
+    }
+
+    .save {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        border: none;
+        margin-top: 70px;
+        height: 79px;
+        border-radius: 0 0 34px 34px;
+        background-color: color(main);
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
+.main-container {
+    background-color: color(background);
+    height: 100%;
+    width: 60%;
+    margin-left: 26px;
+    overflow: auto;
+
+    .filter-header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 50px;
+
+        .left, .right {
+            background-color: color(main);
+            height: 45px;
+
+            p {
+                text-transform: uppercase;
+                color: #fff;
+                font-style: 13px;
             }
         }
-    
-        textarea {
-            max-width: 451.5px;
-            min-width: 451.5px;
-            min-height: 160px;
+
+
+        .right {
+            @include centeredFlex;
+
+            padding: 0 20px;
+            border-radius: 22px 0 0 22px;
         }
-    
-        .save {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            border: none;
-            margin-top: 70px;
-            height: 79px;
-            border-radius: 0 0 34px 34px;
-            background-color: color(main);
-            text-transform: uppercase;
-            color: #fff;
-            font-size: 22px;
-            font-weight: 600;
-            cursor: pointer;
+
+        .left {
+            @include centeredFlex;
+
+            padding: 0 160px 0 60px;
+            border-radius: 0 22px 22px 0;
+
+            input, select {
+                height: 21px;
+                border: none;
+                border-radius: 5px;
+                margin: 0 10px;
+                padding-left: 5px;
+                font-size: 12px;
+            }
+
+            .sortBy {
+                width: 70px;
+            }
+        }
+
+        .separator {
+            border-left: 1px solid #fff;
+            height: 36px;
+        }
+
+        .search {
+            width: 180px;
         }
     }
     
-    .main-container {
-        background-color: color(background);
-        height: 100%;
-        width: 60%;
-        margin-left: 26px;
-    
-        .filter-header {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 50px;
+    .members {
 
-            .left, .right {
-                background-color: color(main);
-                height: 45px;
-    
-                p {
-                    text-transform: uppercase;
-                    color: #fff;
-                    font-style: 13px;
-                }
+        .member {
+            display: grid;
+            grid-template-columns: 50px auto;
+            align-items: center;
+            margin: 27px 27px;
+
+            &:last-child {
+                margin-bottom: 100px;
             }
-
-
-            .right {
+            
+            .delete-btn {
                 @include centeredFlex;
 
-                align-items: center;
-                padding: 0 20px;
-                border-radius: 22px 0 0 22px;
-            }
+                height: 38px;
+                width: 38px;
+                border-radius: 50%;
+                background-color: color(red);
 
-            .left {
-                @include centeredFlex;
-
-                align-items: center;
-                padding: 0 160px 0 60px;
-                border-radius: 0 22px 22px 0;
-
-                input, select {
-                    height: 21px;
-                    border: none;
-                    border-radius: 5px;
-                    margin: 0 10px;
-                    padding-left: 5px;
-                    font-size: 12px;
-                }
-
-                .sortBy {
-                    width: 70px;
+                &:before {
+                    content: "";
+                    display: block;
+                    background-color: #fff;
+                    width: 17px;
+                    height: 6px;
                 }
             }
 
-            .separator {
-                border-left: 1px solid #fff;
-                height: 36px;
-            }
+            .content {
 
-            .search {
-                width: 180px;
+                .name h1 {
+                    margin: 0 0 10px 0;
+                }
+
+                .info {
+                    color: color(main);
+
+                    p {
+                        margin: 0;
+                    }
+                }
+
+                .description {
+                    margin: 0;
+                    height: 3.2em;
+                    line-height: 1.5em;
+                    overflow: hidden;
+
+                    p {
+                        margin: 7px 0 0 0;
+                    }
+                }
             }
         }
     }
