@@ -13,63 +13,65 @@
 
     <div class="container">
         <div class="left-container">
-            <form onsubmit="addMember()">
+            <form>
                 <h1>Add new member</h1>
                 <input type="text" id="name" placeholder="Name">
-                <input type="text" id="email" placeholder="Email">
-                <select id="major" onchange="setMajorValue(this)">
+                <input type="email" id="email" placeholder="Email">
+                <select id="major">
                     <option value="" disabled selected>Major</option>
-                    <option value="computerScience">Computer Science</option>
-                    <option value="computerEngineering">Computer Engineering</option>
-                    <option value="informationTechnology">Information Technology</option>
-                    <option value="informationSystem">Information System</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Information System">Information System</option>
                 </select>
-                <select id="role" onchange="setRoleValue(this)">
+                <select id="role">
                     <option value="" disabled selected>Role</option>
-                    <option value="frontEndDeveloper">Front-End Developer</option>
-                    <option value="backEndDeveloper">Back-End Developer</option>
-                    <option value="fullStackDeveloper">Full-Stack Developer</option>
-                    <option value="UIUXDesigner">UI/UX Designer</option>
+                    <option value="Front-End Developer">Front-End Developer</option>
+                    <option value="Back-End Developer">Back-End Developer</option>
+                    <option value="Full-Stack Developer">Full-Stack Developer</option>
+                    <option value="UI/UX Designer">UI/UX Designer</option>
                 </select>
                 <textarea placeholder="Biography" id="biography" max-width="451.5px"></textarea>
                 <div class="position">
                     <input type="checkbox" id="addToBottom"> Add to Bottom / or at index
                     <input type="number" class="atIndex" id="atIndex" min="0">
                 </div>
-                <input type="submit" value="Save" class="save">
+                <p class="message" id="message"></p>
+                <input type="button" value="Save" class="save" onclick="addMember()">
             </form>
         </div>
-    
+
         <div class="main-container">
             <header class="filter-header">
                 <section class="left">
                     <p>Sort By</p>
-                    <select name="sortBy" class="sortBy">
-                        <option value="A-Z" selected>A-Z</option>
+                    <select name="sortBy" class="sortBy" id="sortByName" onchange="filter('sortByName')">
+                        <option value="default" selected>Default</option>
+                        <option value="A-Z">A-Z</option>
                         <option value="Z-A">Z-A</option>
                         <option value="newest">Newest</option>
                         <option value="oldest">Oldest</option>
                     </select>
                     <div class="separator"></div>
-                    <select name="filter-major" class="filter-major">
+                    <select name="filter-major" class="filter-major" id="filterMajor" onchange="filter('filterMajor')">
                         <option value="" disabled selected>Major</option>
-                        <option value="computerScience">Computer Science</option>
-                        <option value="computerEngineering">Computer Engineering</option>
-                        <option value="informationTechnology">Information Technology</option>
-                        <option value="informationSystem">Information System</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Computer Engineering">Computer Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Information System">Information System</option>
                     </select>
-                    <select name="filter-role" class="filter-role">
+                    <select name="filter-role" class="filter-role" id="filterRole" onchange="filter('filterRole')">
                         <option value="" disabled selected>Role</option>
-                        <option value="frontEndDeveloper">Front-End Developer</option>
-                        <option value="backEndDeveloper">Back-End Developer</option>
-                        <option value="fullStackDeveloper">Full-Stack Developer</option>
-                        <option value="UIUXDesigner">UI/UX Designer</option>
+                        <option value="Front-End Developer">Front-End Developer</option>
+                        <option value="Back-End Developer">Back-End Developer</option>
+                        <option value="Full-Stack Developer">Full-Stack Developer</option>
+                        <option value="UI/UX Designer">UI/UX Designer</option>
                     </select>
                     <div class="separator"></div>
-                    <input type="text" name="search" class="search" placeholder="Search by name ...">
+                    <input type="text" name="search" class="search" id="search" onchange="filter('search')" placeholder="Search by name ...">
                 </section>
                 <section class="right">
-                    <p class="members-number">15 items</p>
+                    <p class="members-number" id="membersNumber"></p>
                 </section>
             </header>
             <div class="members" id="members">

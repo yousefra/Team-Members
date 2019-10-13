@@ -4,7 +4,8 @@ $colors: (
     background: #F6F6F6,
     border: #C3C3C3,
     placeholder: #AEAEAE,
-    red: #FF4A4A
+    red: #FF4A4A,
+    error: #e62d2d1c
 );
 
 @function color($color) {
@@ -71,7 +72,7 @@ html, body {
         color: color(gray);
     }
 
-    input[type="text"], textarea, select {
+    input[type="text"], input[type="email"], textarea, select {
         width: 100%;
         border: 1px solid color(border);
         border-radius: 13px;
@@ -117,7 +118,8 @@ html, body {
     height: 100%;
     width: 60%;
     margin-left: 26px;
-    overflow: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     .filter-header {
         display: flex;
@@ -193,6 +195,7 @@ html, body {
                 width: 38px;
                 border-radius: 50%;
                 background-color: color(red);
+                cursor: pointer;
 
                 &:before {
                     content: "";
@@ -230,4 +233,8 @@ html, body {
             }
         }
     }
+}
+
+.error-bg {
+    background-color: color(error);
 }
