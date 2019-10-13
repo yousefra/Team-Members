@@ -14,7 +14,6 @@ class Members {
     this.members = JSON.parse(localStorage.getItem('members'));
     if(this.members === null) {
       this.members = [];
-      // localStorage.setItem('members', []);
     }
   }
   
@@ -36,53 +35,59 @@ class Members {
     this.storeMembers();
   }
 
+  sortAtoZ() {
+    return this.members.sort(dynamicSort("name"));
+  }
+
+  sortZtoA() {
+    return this.members.sort(dynamicSort("-name"));
+  }
+
+  sortNewest() {
+    return this.members.sort(dynamicSort("time"));
+  }
+
+  sortOldest() {
+    return this.members.sort(dynamicSort("-time"));
+  }
+
+  sortByMajor(value) 
+  {
+    return this.members.filter(member => member.major == value);
+  }
+
+  sortByRole(value) {
+    return this.members.filter(member => member.role == value);
+  }
+
+  search(value) {
+    return this.members.filter(member.name.toLowerCase().includes(value.toLowerCase()));
+  }
+
   getNumberOfMembers() {
     return this.members.length;
   }
 
-  filter(filterId, value) {
-    
+  isEmailExist(email) {
+    return this.members.some(element => element.email == email);
+  }
+
+}
+
+// Dynamic Sort
+function dynamicSort(property) {
+  var sortOrder = 1;
+  if(property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+  }
+  return function (a,b) {
+      var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+      return result * sortOrder;
   }
 }
 
 const members = new Members();
-
-function HTMLMember(index, name, email, major, role, biography) {
-  return `<div class="member">
-            <div class="delete-btn" onclick="deleteMember(${index})"></div>
-            <div class="content">
-                <div class="name">
-                    <h1>${name}</h1>
-                </div>
-                <div class="info">
-                    <p>${email} / ${major} / ${role}</p>
-                </div>
-                <div class="biography">
-                    <p>
-                      ${biography}
-                    </p>
-                </div>
-            </div>
-          </div>`;
-}
-
-const allMembers = members.getAllMembers();
-
-// Display Members in the html page.
-function displayMembers() {
-  document.getElementById("members").innerHTML = "";
-  allMembers.forEach((member, index) => {
-    const memberDiv = HTMLMember(index, member.name, member.email, member.major, member.role, member.biography);
-    document.getElementById("members").innerHTML += memberDiv;     
-  });
-  membersNumber = members.getNumberOfMembers();
-  if(membersNumber == 0 || membersNumber == 1)
-    document.getElementById("membersNumber").innerHTML = membersNumber + " item";
-  else
-    document.getElementById("membersNumber").innerHTML = membersNumber + " items";
-}
-
-displayMembers();
 
 let fields = {
   major: "",
@@ -93,6 +98,8 @@ let fields = {
   atBottom: false,
   atIndex: ""
 };
+
+displayMembers();
 
 function getFieldsValues() {
   fields["name"] = document.getElementById("name").value;
@@ -112,6 +119,42 @@ function clearFieldsValues() {
   fields["biography"] = document.getElementById("biography").value = "";
   fields["atBottom"] = document.getElementById("addToBottom").checked = false;
   fields["atIndex"] = document.getElementById("atIndex").value = "";
+  document.getElementById("message").value = "";
+}
+
+// Create an HTML block for member
+function HTMLMember(index, name, email, major, role, biography) {
+  return `<div class="member">
+            <div class="delete-btn" onclick="deleteMember(${index})"></div>
+            <div class="content" onclick="memberClicked()">
+                <div class="name">
+                    <h1>${name}</h1>
+                </div>
+                <div class="info">
+                    <p>${email} / ${major} / ${role}</p>
+                </div>
+                <div class="biography">
+                    <p>
+                      ${biography}
+                    </p>
+                </div>
+            </div>
+          </div>`;
+}
+
+// Display Members in the html page.
+function displayMembers(displyedMembers = members.getAllMembers()) {
+  document.getElementById("members").innerHTML = "";
+  displyedMembers.forEach((member, index) => {
+    const memberDiv = HTMLMember(index, member.name, member.email, member.major, member.role, member.biography);
+    document.getElementById("members").innerHTML += memberDiv;     
+  });
+  membersNumber = members.getNumberOfMembers();
+  if(membersNumber == 0 || membersNumber == 1)
+    document.getElementById("membersNumber").innerHTML = membersNumber + " item";
+  else
+    document.getElementById("membersNumber").innerHTML = membersNumber + " items";
+  document.getElementById("atIndex").max = membersNumber;
 }
 
 // Validate input fields before adding a member
@@ -120,12 +163,17 @@ function validateFields() {
 
   let message = document.getElementById("message");
 
-  if(fields["name"].value == "" || fields["email"] == "" || fields["major"] == "" || fields["role"] == "" || fields["biography"] == "") {
+  if(fields["name"] == "" || fields["email"] == "" || fields["major"] == "" || fields["role"] == "" || fields["biography"] == "") {
     message.innerText = "All fields required";
     return false;
   }
 
-  console.log(fields["biography"]);
+  console.log(members.isEmailExist(fields["email"]));
+  if(members.isEmailExist(fields["email"])) {
+    message.innerText = "Email already exists";
+    return false;
+  }
+
   if(fields["biography"].length > 1500 || fields["biography"].length < 500) {
     message.innerText = "Biography must be between 500 and 1500 words";
     return false;
@@ -138,11 +186,6 @@ function validateFields() {
 // Create a member object from input values, Then add the member to the local storage.
 function addMember() {
   if(validateFields()) {
-    fields["name"] = document.getElementById("name").value;
-    fields["email"] = document.getElementById("email").value;
-    fields["biography"] = document.getElementById("biography").value;
-    fields["atBottom"] = document.getElementById("addToBottom").checked;
-    fields["atIndex"] = document.getElementById("atIndex").value;
     let index = 0;
     if(fields["atBottom"]) index = members.getNumberOfMembers();
     else if(fields["atIndex"] != "") {
@@ -162,7 +205,66 @@ function deleteMember(index) {
 }
 
 // Filter functions
-function filter(filterId) {
-  let value = document.getElementById(filterId).value;
-  members.filter(filterId, value);
+function sortByName() {
+  let value = document.getElementById("sortByName").value;
+  switch(value) {
+    case "A-Z":
+      displayMembers(members.sortAtoZ());
+      break;
+    case "Z-A":
+      displayMembers(members.sortZtoA());
+      break;
+    case "Newest":
+      displayMembers(members.sortNewest());
+      break;
+    case "Oldest":
+      displayMembers(members.sortOldest());
+      break;
+  }
+}
+
+function sortByMajor() {
+  let value = document.getElementById("filterMajor").value;
+  displayMembers(members.sortByMajor(value));
+}
+
+function sortByRole() {
+  let value = document.getElementById("filterRole").value;
+  displayMembers(members.sortByRole(value));
+}
+
+function search() {
+  let value = document.getElementById("search").value;
+  displayMembers(members.search(value));
+}
+// End filter functions
+
+function addToBottomClicked() {
+  let atIndex = document.getElementById("atIndex");
+  if(document.getElementById("addToBottom").checked) {
+    atIndex.disabled = true;
+    atIndex.value = "";
+  }
+  else 
+    document.getElementById("atIndex").disabled = false;
+}
+
+// Get the modal
+let modal = document.getElementById("myModal");
+
+// When the user clicks the button, open the modal 
+function memberClicked() {
+  modal.style.display = "flex";
+}
+
+// When the user clicks on <span> (x), close the modal
+function closeModal() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
