@@ -48,60 +48,31 @@ class Members {
   filterMembers(sortByName, filterMajor, filterRole, search) {
     let result = this.members;
     if(filterMajor !== "")
-      result.filter(member => member.major === filterMajor);
+      result = result.filter(member => member.major === filterMajor);
 
     if(filterRole !== "")
-      result.filter(member => member.role === filterRole);
+      result = result.filter(member => member.role === filterRole);
 
     if(search !== "")
-      result.filter(member.name.toLowerCase().includes(search.toLowerCase()));
+      result = result.filter(member => member.name.toLowerCase().includes(search.toLowerCase()));
 
     if(sortByName !== "") {
       switch(sortByName) {
         case "A-Z":
-          result.sort((a, b) => (a.name < b.name) ? 1: -1);
+          result = result.sort((a, b) => (a.name < b.name) ? 1: -1);
           break;
         case "Z-A":
-          result.sort((a, b) => (a.name > b.name) ? 1: -1);
+          result = result.sort((a, b) => (a.name > b.name) ? 1: -1);
           break;
         case "Newest":
-          result.sort((a, b) => (a.time < b.time) ? 1: -1);
+          result = result.sort((a, b) => (a.time < b.time) ? 1: -1);
           break;
         case "Oldest":
-          result.sort((a, b) => (a.time > b.time) ? 1: -1);
+          result = result.sort((a, b) => (a.time > b.time) ? 1: -1);
           break;
       }
     }
     return result;
-  }
-
-  sortAtoZ() {
-    return this.members.sort((a, b) => (a.name < b.name) ? 1: -1);
-  }
-
-  sortZtoA() {
-    return this.members.sort((a, b) => (a.name > b.name) ? 1: -1);
-  }
-
-  sortNewest() {
-    return this.members.sort((a, b) => (a.time < b.time) ? 1: -1);
-  }
-
-  sortOldest() {
-    return this.members.sort((a, b) => (a.time > b.time) ? 1: -1);
-  }
-
-  sortByMajor(value) 
-  {
-    return this.members.filter(member => member.major === value);
-  }
-
-  sortByRole(value) {
-    return this.members.filter(member => member.role === value);
-  }
-
-  search(value) {
-    return this.members.filter(member.name.toLowerCase().includes(value.toLowerCase()));
   }
 
   getNumberOfMembers() {
@@ -268,54 +239,21 @@ function addMember() {
 function deleteMember(email = currentEmail) {
   members.deleteMember(email);
   displayMembers();
+  if(currentEmail !== "") closeModal();
 }
 
 // Update modal member by email
 function updateMember() {
   getModalFields();
-  if(members.isEmailExist(modalFields["name"])) {
-    
+  if(currentEmail != modalFields["email"] && members.isEmailExist(modalFields["email"])) {
+    document.getElementById("modal-message").innerHTML = "Email already exists";
     return false;
   }
   let newMember = new Member(modalFields["name"], modalFields["email"], modalFields["major"], modalFields["role"], modalFields["biography"], modalFields["time"]);
   members.updateMember(currentEmail, newMember);
   displayMembers();
+  if(currentEmail !== "") closeModal();
 }
-
-// Filter functions
-function sortByName() {
-  let value = document.getElementById("sortByName").value;
-  switch(value) {
-    case "A-Z":
-      displayMembers(members.sortAtoZ());
-      break;
-    case "Z-A":
-      displayMembers(members.sortZtoA());
-      break;
-    case "Newest":
-      displayMembers(members.sortNewest());
-      break;
-    case "Oldest":
-      displayMembers(members.sortOldest());
-      break;
-  }
-}
-
-function sortByMajor() {
-  let value = document.getElementById("filterMajor").value;
-  displayMembers(members.sortByMajor(value));
-}
-
-function sortByRole() {
-  let value = document.getElementById("filterRole").value;
-  displayMembers(members.sortByRole(value));
-}
-
-function search() {
-  let value = document.getElementById("search").value;
-  displayMembers(members.search(value));
-}
-// End filter functions
 
 function addToBottomClicked() {
   let atIndex = document.getElementById("atIndex");
@@ -337,6 +275,7 @@ function memberClicked(email) {
 function closeModal() {
   modal.style.display = "none";
   currentEmail = "";
+  document.getElementById("modal-message").innerHTML = "";
 }
 
 // When the user clicks anywhere outside of the modal, close it

@@ -8,8 +8,8 @@ $colors: (
 	red: #ff4a4a,
 	lightred: #ff6565,
 	black: #484848,
-    lightblack: #6A6A6A,
-    error: #e62d2d1c
+	lightblack: #6a6a6a,
+	error: #e62d2d1c
 );
 
 @function color($color) {
@@ -38,6 +38,10 @@ body {
 
 ::placeholder {
 	color: color(placeholder);
+}
+
+.title {
+	cursor: pointer;
 }
 
 .main-header {
@@ -86,8 +90,8 @@ body {
 		height: 66px;
 		margin: 13px 6%;
 		padding: 18px;
-        font-size: 18px;
-        outline: none;
+		font-size: 18px;
+		outline: none;
 	}
 
 	.position {
@@ -123,11 +127,6 @@ body {
 		&:hover {
 			background-color: color(lightblue);
 		}
-	}
-
-	.message {
-		text-align: center;
-		color: red;
 	}
 }
 
@@ -279,13 +278,12 @@ body {
 		background-color: #fff;
 		margin: auto;
 		padding: 20px;
-		border: 1px solid color(gray);
 		width: 80%;
 		border-radius: 42px;
 	}
 
 	.close {
-        @include centeredFlex();
+		@include centeredFlex();
 
 		position: fixed;
 		margin-left: -35px;
@@ -305,121 +303,131 @@ body {
 			text-decoration: none;
 			cursor: pointer;
 		}
-    }
-    
-    .container {
-        @include centeredFlex();
+	}
 
-        flex-direction: column;
-        margin: 103px 169px;
+	.container {
+		@include centeredFlex();
 
-        .modal-name {
-            font-size: 78px;
-            margin-top: 0;
-            margin-bottom: 40px;
-            text-align: center;
-            border: 0;
-            outline: none;
-            font-weight: bold;
-            border-radius: 100px;
+		flex-direction: column;
+		margin: 103px 169px;
 
-            &:focus, &:active {
-                border: 1px solid color(border);
-            }
-        }
+		.modal-name {
+			font-size: 78px;
+			margin-top: 0;
+			margin-bottom: 40px;
+			text-align: center;
+			border: 0;
+			outline: none;
+			font-weight: bold;
+			border-radius: 100px;
 
-        .main-info {
-            display: flex;
-            
-            input, select, .separator {
-                color: color(main);
-                font-size: 14px;
-                font-weight: bold;
-                height: 24px;
-                outline: none;
-            }
+			&:focus,
+			&:active {
+				border: 1px solid color(border);
+			}
+		}
 
-            input {
-                border: 0;
-                text-align: right;
+		.main-info {
+			display: flex;
 
-                &:focus, &:active {
-                    border: 1px solid color(border);
-                    border-radius: 7px;
-                }
-            }
+			input,
+			select,
+			.separator {
+				color: color(main);
+				font-size: 14px;
+				font-weight: bold;
+				height: 24px;
+				outline: none;
+			}
 
-            select {
-                border: 1px solid color(border);
-                border-radius: 7px;
-            }
+			input {
+				border: 0;
+				text-align: right;
 
-            .separator {
-                font-size: 16px;
-                margin: 0 5px;
-            }
-        }
+				&:focus,
+				&:active {
+					border: 1px solid color(border);
+					border-radius: 7px;
+				}
+			}
 
-        .biography {
-            margin-top: 38px;
-            min-width: 100%;
-            max-width: 100%;
-            min-height: 140px;
-            max-height: 140px;
-            text-align: center;
-            border: 0;
-            font-size: 14px;
-            color: color(lightblack);
-            outline: none;
-            padding: 0 5px;
+			select {
+				border: 1px solid color(border);
+				border-radius: 7px;
+			}
 
-            &:focus, &:active {
-                border: 1px solid color(border);
-                border-radius: 7px;
-                color: color(black);
-            }
-        }
+			.separator {
+				font-size: 16px;
+				margin: 0 5px;
+			}
+		}
 
-        .buttons {
-            margin-top: 40px;
+		.biography {
+			margin-top: 38px;
+			min-width: 100%;
+			max-width: 100%;
+			min-height: 140px;
+			max-height: 140px;
+			text-align: center;
+			border: 0;
+			font-size: 14px;
+			color: color(lightblack);
+			outline: none;
+			padding: 0 5px;
 
-            button {
-                width: 194px;
-                height: 55px;
-                text-transform: uppercase;
-                font-size: 22px;
-                color: #fff;
-                border: 0;
-                margin: 0 10px;
-                cursor: pointer;
-            }
-            
-            .delete {
-                background-color: color(red);
-                transition: 0.2s;
+			&:focus,
+			&:active {
+				border: 1px solid color(border);
+				border-radius: 7px;
+				color: color(black);
+			}
+		}
 
-                &:hover {
-                    background-color: color(lightred);
-                }
-            }
-            
-            .save {
-                background-color: color(main);
-                transition: 0.2s;
+		.buttons {
+			margin-top: 40px;
 
-                &:hover {
-                    background-color: color(lightblue);
-                }
-            }
-            
-            .cancel {
-                background-color: color(black);
-                transition: 0.2s;
+			button {
+				width: 194px;
+				height: 55px;
+				text-transform: uppercase;
+				font-size: 22px;
+				color: #fff;
+				border: 0;
+				margin: 0 10px;
+				cursor: pointer;
+			}
 
-                &:hover {
-                    background-color: color(lightblack);
-                }
-            }
-        }
-    }
+			.delete {
+				background-color: color(red);
+				transition: 0.2s;
+
+				&:hover {
+					background-color: color(lightred);
+				}
+			}
+
+			.save {
+				background-color: color(main);
+				transition: 0.2s;
+
+				&:hover {
+					background-color: color(lightblue);
+				}
+			}
+
+			.cancel {
+				background-color: color(black);
+				transition: 0.2s;
+
+				&:hover {
+					background-color: color(lightblack);
+				}
+			}
+		}
+	}
+}
+
+.message {
+	text-align: center;
+	color: red;
 }

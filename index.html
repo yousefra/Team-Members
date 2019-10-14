@@ -8,7 +8,7 @@
 <body>
     
     <header class="main-header">
-        <h1>PSEU Team Memebers</h1>
+        <h1 class="title" onclick="location.reload()">PSEU Team Memebers</h1>
     </header>
 
     <div class="container">
@@ -46,7 +46,7 @@
                 <section class="left">
                     <p>Sort By</p>
                     <select name="sortBy" class="sortBy" id="sortByName" onchange="displayMembers()">
-                        <option value="default" selected>Default</option>
+                        <option value="" selected>Default</option>
                         <option value="A-Z">A-Z</option>
                         <option value="Z-A">Z-A</option>
                         <option value="Newest">Newest</option>
@@ -54,14 +54,16 @@
                     </select>
                     <div class="separator"></div>
                     <select name="filter-major" class="filter-major" id="filterMajor" onchange="displayMembers()">
-                        <option value="" selected>Major</option>
+                        <option value="" disabled selected>Major</option>
+                        <option value="">All</option>
                         <option value="Computer Science">Computer Science</option>
                         <option value="Computer Engineering">Computer Engineering</option>
                         <option value="Information Technology">Information Technology</option>
                         <option value="Information System">Information System</option>
                     </select>
                     <select name="filter-role" class="filter-role" id="filterRole" onchange="displayMembers()">
-                        <option value="" selected>Role</option>
+                        <option value="" disabled selected>Role</option>
+                        <option value="">All</option>
                         <option value="Front-End Developer">Front-End Developer</option>
                         <option value="Back-End Developer">Back-End Developer</option>
                         <option value="Full-Stack Developer">Full-Stack Developer</option>
@@ -102,6 +104,7 @@
                     </select>
                 </div>
                 <textarea class="biography" id="modal-biography" spellcheck="false"></textarea>
+                <p class="message" id="modal-message"></p>
                 <div class="buttons">
                     <button class="delete" onclick="deleteMember()">Delete</button>
                     <button class="save" onclick="updateMember()">Save</button>
