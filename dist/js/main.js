@@ -119,7 +119,8 @@ function clearFieldsValues() {
   fields["biography"] = document.getElementById("biography").value = "";
   fields["atBottom"] = document.getElementById("addToBottom").checked = false;
   fields["atIndex"] = document.getElementById("atIndex").value = "";
-  document.getElementById("message").value = "";
+  document.getElementById("message").innerHTML = "";
+  document.getElementById("atIndex").innerHTML = "";
 }
 
 // Create an HTML block for member
