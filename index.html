@@ -45,7 +45,7 @@
             <header class="filter-header">
                 <section class="left">
                     <p>Sort By</p>
-                    <select name="sortBy" class="sortBy" id="sortByName" onchange="sortByName()">
+                    <select name="sortBy" class="sortBy" id="sortByName" onchange="displayMembers()">
                         <option value="default" selected>Default</option>
                         <option value="A-Z">A-Z</option>
                         <option value="Z-A">Z-A</option>
@@ -53,14 +53,14 @@
                         <option value="Oldest">Oldest</option>
                     </select>
                     <div class="separator"></div>
-                    <select name="filter-major" class="filter-major" id="filterMajor" onchange="sortByMajor()">
+                    <select name="filter-major" class="filter-major" id="filterMajor" onchange="displayMembers()">
                         <option value="" selected>Major</option>
                         <option value="Computer Science">Computer Science</option>
                         <option value="Computer Engineering">Computer Engineering</option>
                         <option value="Information Technology">Information Technology</option>
                         <option value="Information System">Information System</option>
                     </select>
-                    <select name="filter-role" class="filter-role" id="filterRole" onchange="sortByRole()">
+                    <select name="filter-role" class="filter-role" id="filterRole" onchange="displayMembers()">
                         <option value="" selected>Role</option>
                         <option value="Front-End Developer">Front-End Developer</option>
                         <option value="Back-End Developer">Back-End Developer</option>
@@ -68,7 +68,7 @@
                         <option value="UI/UX Designer">UI/UX Designer</option>
                     </select>
                     <div class="separator"></div>
-                    <input type="text" name="search" class="search" id="search" onkeyup="search()" placeholder="Search by name ...">
+                    <input type="text" name="search" class="search" id="search" onkeyup="displayMembers()" placeholder="Search by name ...">
                 </section>
                 <section class="right">
                     <p class="members-number" id="membersNumber"></p>

@@ -45,6 +45,36 @@ class Members {
     this.storeMembers();
   }
 
+  filterMembers(sortByName, filterMajor, filterRole, search) {
+    let result = this.members;
+    if(filterMajor !== "")
+      result.filter(member => member.major === filterMajor);
+
+    if(filterRole !== "")
+      result.filter(member => member.role === filterRole);
+
+    if(search !== "")
+      result.filter(member.name.toLowerCase().includes(search.toLowerCase()));
+
+    if(sortByName !== "") {
+      switch(sortByName) {
+        case "A-Z":
+          result.sort((a, b) => (a.name < b.name) ? 1: -1);
+          break;
+        case "Z-A":
+          result.sort((a, b) => (a.name > b.name) ? 1: -1);
+          break;
+        case "Newest":
+          result.sort((a, b) => (a.time < b.time) ? 1: -1);
+          break;
+        case "Oldest":
+          result.sort((a, b) => (a.time > b.time) ? 1: -1);
+          break;
+      }
+    }
+    return result;
+  }
+
   sortAtoZ() {
     return this.members.sort((a, b) => (a.name < b.name) ? 1: -1);
   }
@@ -171,7 +201,15 @@ function HTMLMember(index, name, email, major, role, biography) {
 }
 
 // Display Members in the html page.
-function displayMembers(displyedMembers = members.getAllMembers()) {
+function displayMembers() {
+  // Get members to display
+  let sortByName = document.getElementById("sortByName").value;
+  let filterMajor = document.getElementById("filterMajor").value;
+  let filterRole = document.getElementById("filterRole").value;
+  let search = document.getElementById("search").value;
+  let displyedMembers = members.filterMembers(sortByName, filterMajor, filterRole, search);
+
+  // Edit the html based on gotten members
   document.getElementById("members").innerHTML = "";
   displyedMembers.forEach((member, index) => {
     const memberDiv = HTMLMember(index, member.name, member.email, member.major, member.role, member.biography);
