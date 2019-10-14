@@ -30,8 +30,8 @@ class Members {
     this.storeMembers();
   }
 
-  deleteMember(index) {
-    this.members.splice(index, 1);
+  deleteMember(email) {
+    this.members = this.members.filter(member => member.email !== email);
     this.storeMembers();
   }
 
@@ -53,11 +53,11 @@ class Members {
 
   sortByMajor(value) 
   {
-    return this.members.filter(member => member.major == value);
+    return this.members.filter(member => member.major === value);
   }
 
   sortByRole(value) {
-    return this.members.filter(member => member.role == value);
+    return this.members.filter(member => member.role === value);
   }
 
   search(value) {
@@ -69,7 +69,7 @@ class Members {
   }
 
   isEmailExist(email) {
-    return this.members.some(element => element.email == email);
+    return this.members.some(element => element.email === email);
   }
 
 }
@@ -125,7 +125,7 @@ function clearFieldsValues() {
 // Create an HTML block for member
 function HTMLMember(index, name, email, major, role, biography) {
   return `<div class="member">
-            <div class="delete-btn" onclick="deleteMember(${index})"></div>
+            <div class="delete-btn" onclick="deleteMember(${email})"></div>
             <div class="content" onclick="memberClicked()">
                 <div class="name">
                     <h1>${name}</h1>
@@ -198,9 +198,9 @@ function addMember() {
   }
 }
 
-// Delete member by index
-function deleteMember(index) {
-  members.deleteMember(index);
+// Delete member by email
+function deleteMember(email) {
+  members.deleteMember(email);
   displayMembers();
 }
 
