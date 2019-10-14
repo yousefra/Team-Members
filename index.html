@@ -54,14 +54,14 @@
                     </select>
                     <div class="separator"></div>
                     <select name="filter-major" class="filter-major" id="filterMajor" onchange="sortByMajor()">
-                        <option value="" disabled selected>Major</option>
+                        <option value="" selected>Major</option>
                         <option value="Computer Science">Computer Science</option>
                         <option value="Computer Engineering">Computer Engineering</option>
                         <option value="Information Technology">Information Technology</option>
                         <option value="Information System">Information System</option>
                     </select>
                     <select name="filter-role" class="filter-role" id="filterRole" onchange="sortByRole()">
-                        <option value="" disabled selected>Role</option>
+                        <option value="" selected>Role</option>
                         <option value="Front-End Developer">Front-End Developer</option>
                         <option value="Back-End Developer">Back-End Developer</option>
                         <option value="Full-Stack Developer">Full-Stack Developer</option>
@@ -81,8 +81,28 @@
 
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeModal" onclick="closeModal()">&times;</span>
-            <p>Some text in the Modal..</p>
+            <span class="close" id="closeModal" onclick="closeModal()">X</span>
+            <div class="container">
+                <h1>Yosuef Aburayyan</h1>
+                <div class="main-info">
+                    <input type="text" class="email">
+                    <p class="separator">/</p>
+                    <select>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Computer Engineering">Computer Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Information System">Information System</option>
+                    </select>
+                    <p class="separator">/</p>
+                    <select>
+                        <option value="Front-End Developer">Front-End Developer</option>
+                        <option value="Back-End Developer">Back-End Developer</option>
+                        <option value="Full-Stack Developer">Full-Stack Developer</option>
+                        <option value="UI/UX Designer">UI/UX Designer</option>
+                    </select>
+                </div>
+                <textarea class="biography" spellcheck="false"></textarea>
+            </div>
         </div>
     </div>
 
