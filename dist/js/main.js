@@ -21,6 +21,10 @@ class Members {
     return this.members;
   }
 
+  getMember(email) {
+    return this.members.filter(member => member.email === email)[0];
+  }
+
   storeMembers() {
     localStorage.setItem('members', JSON.stringify(this.members));
   }
@@ -35,20 +39,26 @@ class Members {
     this.storeMembers();
   }
 
+  updateMember(oldEmail, newMember) {
+    let index = this.members.findIndex(member => member.email === oldEmail);
+    this.members[index] = newMember;
+    this.storeMembers();
+  }
+
   sortAtoZ() {
-    return this.members.sort(dynamicSort("name"));
+    return this.members.sort((a, b) => (a.name < b.name) ? 1: -1);
   }
 
   sortZtoA() {
-    return this.members.sort(dynamicSort("-name"));
+    return this.members.sort((a, b) => (a.name > b.name) ? 1: -1);
   }
 
   sortNewest() {
-    return this.members.sort(dynamicSort("time"));
+    return this.members.sort((a, b) => (a.time < b.time) ? 1: -1);
   }
 
   sortOldest() {
-    return this.members.sort(dynamicSort("-time"));
+    return this.members.sort((a, b) => (a.time > b.time) ? 1: -1);
   }
 
   sortByMajor(value) 
@@ -74,19 +84,6 @@ class Members {
 
 }
 
-// Dynamic Sort
-function dynamicSort(property) {
-  var sortOrder = 1;
-  if(property[0] === "-") {
-      sortOrder = -1;
-      property = property.substr(1);
-  }
-  return function (a,b) {
-      var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-      return result * sortOrder;
-  }
-}
-
 const members = new Members();
 
 let fields = {
@@ -98,6 +95,18 @@ let fields = {
   atBottom: false,
   atIndex: ""
 };
+
+let modalFields = {
+  name: "",
+  email: "",
+  major: "",
+  role: "",
+  biography: "",
+  time: ""
+}
+
+let modal = document.getElementById("myModal");
+let currentEmail = "";
 
 displayMembers();
 
@@ -123,11 +132,29 @@ function clearFieldsValues() {
   document.getElementById("atIndex").innerHTML = "";
 }
 
+function getModalFields() {
+  modalFields["name"] = document.getElementById("modal-name").value;
+  modalFields["email"] = document.getElementById("modal-email").value;
+  modalFields["major"] = document.getElementById("modal-major").value;
+  modalFields["role"] = document.getElementById("modal-role").value;
+  modalFields["biography"] = document.getElementById("modal-biography").innerHTML;
+}
+
+function setModalFields(member) {
+  document.getElementById("modal-name").value = member.name;
+  document.getElementById("modal-email").value = member.email;
+  document.getElementById("modal-major").value = member.major;
+  document.getElementById("modal-role").value = member.role;
+  document.getElementById("modal-biography").innerHTML = member.biography;
+  modalFields["time"] = member.time;
+  currentEmail = member.email;
+}
+
 // Create an HTML block for member
 function HTMLMember(index, name, email, major, role, biography) {
   return `<div class="member">
-            <div class="delete-btn" onclick="deleteMember(${email})"></div>
-            <div class="content" onclick="memberClicked()">
+            <div class="delete-btn" onclick="deleteMember('${email}')"></div>
+            <div class="content" onclick="memberClicked('${email}')">
                 <div class="name">
                     <h1>${name}</h1>
                 </div>
@@ -200,8 +227,20 @@ function addMember() {
 }
 
 // Delete member by email
-function deleteMember(email) {
+function deleteMember(email = currentEmail) {
   members.deleteMember(email);
+  displayMembers();
+}
+
+// Update modal member by email
+function updateMember() {
+  getModalFields();
+  if(members.isEmailExist(modalFields["name"])) {
+    
+    return false;
+  }
+  let newMember = new Member(modalFields["name"], modalFields["email"], modalFields["major"], modalFields["role"], modalFields["biography"], modalFields["time"]);
+  members.updateMember(currentEmail, newMember);
   displayMembers();
 }
 
@@ -250,17 +289,16 @@ function addToBottomClicked() {
     document.getElementById("atIndex").disabled = false;
 }
 
-// Get the modal
-let modal = document.getElementById("myModal");
-
 // When the user clicks the button, open the modal 
-function memberClicked() {
+function memberClicked(email) {
   modal.style.display = "flex";
+  setModalFields(members.getMember(email));
 }
 
-// When the user clicks on <span> (x), close the modal
+// When the user clicks on (x), close the modal
 function closeModal() {
   modal.style.display = "none";
+  currentEmail = "";
 }
 
 // When the user clicks anywhere outside of the modal, close it

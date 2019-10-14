@@ -83,25 +83,30 @@
         <div class="modal-content">
             <span class="close" id="closeModal" onclick="closeModal()">X</span>
             <div class="container">
-                <h1>Yosuef Aburayyan</h1>
+                <input type="text" class="modal-name" id="modal-name" name="modal-name" spellcheck="false" autocomplete="fake">
                 <div class="main-info">
-                    <input type="text" class="email">
+                    <input type="text" class="email" id="modal-email">
                     <p class="separator">/</p>
-                    <select>
+                    <select id="modal-major">
                         <option value="Computer Science">Computer Science</option>
                         <option value="Computer Engineering">Computer Engineering</option>
                         <option value="Information Technology">Information Technology</option>
                         <option value="Information System">Information System</option>
                     </select>
                     <p class="separator">/</p>
-                    <select>
+                    <select id="modal-role">
                         <option value="Front-End Developer">Front-End Developer</option>
                         <option value="Back-End Developer">Back-End Developer</option>
                         <option value="Full-Stack Developer">Full-Stack Developer</option>
                         <option value="UI/UX Designer">UI/UX Designer</option>
                     </select>
                 </div>
-                <textarea class="biography" spellcheck="false"></textarea>
+                <textarea class="biography" id="modal-biography" spellcheck="false"></textarea>
+                <div class="buttons">
+                    <button class="delete" onclick="deleteMember()">Delete</button>
+                    <button class="save" onclick="updateMember()">Save</button>
+                    <button class="cancel" onclick="closeModal()">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
