@@ -186,7 +186,7 @@ function displayMembers() {
     const memberDiv = HTMLMember(index, member.name, member.email, member.major, member.role, member.biography);
     document.getElementById("members").innerHTML += memberDiv;     
   });
-  membersNumber = members.getNumberOfMembers();
+  membersNumber = displyedMembers.length;
   if(membersNumber == 0 || membersNumber == 1)
     document.getElementById("membersNumber").innerHTML = membersNumber + " item";
   else
